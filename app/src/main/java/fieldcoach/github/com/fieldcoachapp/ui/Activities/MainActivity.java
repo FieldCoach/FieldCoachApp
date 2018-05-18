@@ -1,4 +1,4 @@
-package fieldcoach.github.com.fieldcoachapp;
+package fieldcoach.github.com.fieldcoachapp.ui.Activities;
 
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
@@ -8,9 +8,10 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.MenuItem;
 
-import fieldcoach.github.com.fieldcoachapp.ui.HomeFragment;
-import fieldcoach.github.com.fieldcoachapp.ui.SquadFragment;
-import fieldcoach.github.com.fieldcoachapp.ui.SquadListFragment;
+import fieldcoach.github.com.fieldcoachapp.R;
+import fieldcoach.github.com.fieldcoachapp.ui.Fragments.HomeFragment;
+import fieldcoach.github.com.fieldcoachapp.ui.Fragments.SquadFragment;
+import fieldcoach.github.com.fieldcoachapp.ui.Fragments.SquadListFragment;
 
 public class MainActivity extends AppCompatActivity {
 

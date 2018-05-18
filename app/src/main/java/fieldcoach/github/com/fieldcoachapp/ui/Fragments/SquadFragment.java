@@ -1,5 +1,4 @@
-package fieldcoach.github.com.fieldcoachapp.ui;
-
+package fieldcoach.github.com.fieldcoachapp.ui.Fragments;
 
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -12,20 +11,18 @@ import android.view.ViewGroup;
 import fieldcoach.github.com.fieldcoachapp.R;
 
 /**
- * Displays sneak peak info for active squad, upcoming fixtures, table info, fixtures, training schedule.
- * Has an App Bar menu for Settings.
+ * Displays active/selected squad.(Pitch/Field View). Team formation, substitutions, tactics etc.
+ * set within this fragment.
  */
 
-public class HomeFragment extends Fragment {
+public class SquadFragment extends Fragment {
 
-    public HomeFragment() {
+    public SquadFragment() {
     }
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.fragment_home, container, false);
+        return inflater.inflate(R.layout.fragment_squad, container, false);
     }
-
-
 }
