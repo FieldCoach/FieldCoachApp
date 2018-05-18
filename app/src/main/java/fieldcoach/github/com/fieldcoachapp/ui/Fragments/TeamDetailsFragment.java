@@ -1,6 +1,5 @@
 package fieldcoach.github.com.fieldcoachapp.ui.Fragments;
 
-
 import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
@@ -13,11 +12,11 @@ import android.view.ViewGroup;
 import fieldcoach.github.com.fieldcoachapp.R;
 
 /**
- * Displays sneak peak info for active squad, upcoming fixtures, table info, fixtures, training schedule.
- * Has an App Bar menu for Settings.
+ * Displays active/selected squad.(Pitch/Field View). Team formation, substitutions, tactics etc.
+ * set within this fragment.
  */
 
-public class HomeFragment extends Fragment {
+public class TeamDetailsFragment extends Fragment {
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -28,9 +27,9 @@ public class HomeFragment extends Fragment {
     private String mParam1;
     private String mParam2;
 
-    private OnHomeInteractionListener mListener;
+    private OnTeamDetailsInteractionListener mListener;
 
-    public HomeFragment() {
+    public TeamDetailsFragment() {
         // Required empty public constructor
     }
 
@@ -65,24 +64,24 @@ public class HomeFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_home, container, false);
+        return inflater.inflate(R.layout.fragment_team_details, container, false);
     }
 
     // TODO: Rename method, update argument and hook method into UI event
     public void onButtonPressed(Uri uri) {
         if (mListener != null) {
-            mListener.onHomeInteraction(uri);
+            mListener.onTeamDetailsInteraction(uri);
         }
     }
 
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
-        if (context instanceof OnHomeInteractionListener) {
-            mListener = (OnHomeInteractionListener) context;
+        if (context instanceof OnTeamDetailsInteractionListener) {
+            mListener = (OnTeamDetailsInteractionListener) context;
         } else {
             throw new RuntimeException(context.toString()
-                    + " must implement OnHomeInteractionListener");
+                    + " must implement OnTeamDetailsInteractionListener");
         }
     }
 
@@ -102,9 +101,8 @@ public class HomeFragment extends Fragment {
      * "http://developer.android.com/training/basics/fragments/communicating.html"
      * >Communicating with Other Fragments</a> for more information.
      */
-    public interface OnHomeInteractionListener {
+    public interface OnTeamDetailsInteractionListener {
         // TODO: Update argument type and name
-        void onHomeInteraction(Uri uri);
+        void onTeamDetailsInteraction(Uri uri);
     }
-
 }

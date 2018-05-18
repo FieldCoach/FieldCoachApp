@@ -1,6 +1,5 @@
 package fieldcoach.github.com.fieldcoachapp.ui.Fragments;
 
-
 import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
@@ -13,12 +12,14 @@ import android.view.ViewGroup;
 import fieldcoach.github.com.fieldcoachapp.R;
 
 /**
- * Displays sneak peak info for active squad, upcoming fixtures, table info, fixtures, training schedule.
- * Has an App Bar menu for Settings.
+ * A simple {@link Fragment} subclass.
+ * Activities that contain this fragment must implement the
+ * {@link TeamTablesFragment.OnTeamTableInteractionListener} interface
+ * to handle interaction events.
+ * Use the {@link TeamTablesFragment#newInstance} factory method to
+ * create an instance of this fragment.
  */
-
-public class HomeFragment extends Fragment {
-
+public class TeamTablesFragment extends Fragment {
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -28,9 +29,9 @@ public class HomeFragment extends Fragment {
     private String mParam1;
     private String mParam2;
 
-    private OnHomeInteractionListener mListener;
+    private OnTeamTableInteractionListener mListener;
 
-    public HomeFragment() {
+    public TeamTablesFragment() {
         // Required empty public constructor
     }
 
@@ -40,11 +41,11 @@ public class HomeFragment extends Fragment {
      *
      * @param param1 Parameter 1.
      * @param param2 Parameter 2.
-     * @return A new instance of fragment TeamStatsFragment.
+     * @return A new instance of fragment TeamTablesFragment.
      */
     // TODO: Rename and change types and number of parameters
-    public static TeamStatsFragment newInstance(String param1, String param2) {
-        TeamStatsFragment fragment = new TeamStatsFragment();
+    public static TeamTablesFragment newInstance(String param1, String param2) {
+        TeamTablesFragment fragment = new TeamTablesFragment();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
         args.putString(ARG_PARAM2, param2);
@@ -65,24 +66,24 @@ public class HomeFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_home, container, false);
+        return inflater.inflate(R.layout.fragment_team_tables, container, false);
     }
 
     // TODO: Rename method, update argument and hook method into UI event
     public void onButtonPressed(Uri uri) {
         if (mListener != null) {
-            mListener.onHomeInteraction(uri);
+            mListener.onTeamTableInteraction(uri);
         }
     }
 
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
-        if (context instanceof OnHomeInteractionListener) {
-            mListener = (OnHomeInteractionListener) context;
+        if (context instanceof OnTeamTableInteractionListener) {
+            mListener = (OnTeamTableInteractionListener) context;
         } else {
             throw new RuntimeException(context.toString()
-                    + " must implement OnHomeInteractionListener");
+                    + " must implement OnTeamTableInteractionListener");
         }
     }
 
@@ -102,9 +103,8 @@ public class HomeFragment extends Fragment {
      * "http://developer.android.com/training/basics/fragments/communicating.html"
      * >Communicating with Other Fragments</a> for more information.
      */
-    public interface OnHomeInteractionListener {
+    public interface OnTeamTableInteractionListener {
         // TODO: Update argument type and name
-        void onHomeInteraction(Uri uri);
+        void onTeamTableInteraction(Uri uri);
     }
-
 }
