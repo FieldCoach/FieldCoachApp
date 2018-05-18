@@ -1,4 +1,4 @@
-package fieldcoach.github.com.fieldcoachapp.ui.Activities;
+package fieldcoach.github.com.fieldcoachapp.ui.activities;
 
 import android.net.Uri;
 import android.support.annotation.NonNull;
@@ -10,11 +10,11 @@ import android.os.Bundle;
 import android.view.MenuItem;
 
 import fieldcoach.github.com.fieldcoachapp.R;
-import fieldcoach.github.com.fieldcoachapp.ui.Fragments.HomeFragment;
-import fieldcoach.github.com.fieldcoachapp.ui.Fragments.TeamDetailsFragment;
-import fieldcoach.github.com.fieldcoachapp.ui.Fragments.SquadFixtureFragment;
-import fieldcoach.github.com.fieldcoachapp.ui.Fragments.TeamStatsFragment;
-import fieldcoach.github.com.fieldcoachapp.ui.Fragments.TeamTablesFragment;
+import fieldcoach.github.com.fieldcoachapp.ui.fragments.HomeFragment;
+import fieldcoach.github.com.fieldcoachapp.ui.fragments.TeamDetailsFragment;
+import fieldcoach.github.com.fieldcoachapp.ui.fragments.SquadFixtureFragment;
+import fieldcoach.github.com.fieldcoachapp.ui.fragments.TeamStatsFragment;
+import fieldcoach.github.com.fieldcoachapp.ui.fragments.TeamTablesFragment;
 
 public class TeamsActivity extends AppCompatActivity
         implements HomeFragment.OnHomeInteractionListener,

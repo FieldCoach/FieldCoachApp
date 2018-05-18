@@ -1,4 +1,4 @@
-package fieldcoach.github.com.fieldcoachapp.ui.Fragments;
+package fieldcoach.github.com.fieldcoachapp.ui.fragments;
 
 import android.content.Context;
 import android.net.Uri;
@@ -12,14 +12,11 @@ import android.view.ViewGroup;
 import fieldcoach.github.com.fieldcoachapp.R;
 
 /**
- * A simple {@link Fragment} subclass.
- * Activities that contain this fragment must implement the
- * {@link TeamStatsFragment.OnTeamStatsInteractionListener} interface
- * to handle interaction events.
- * Use the {@link TeamStatsFragment#newInstance} factory method to
- * create an instance of this fragment.
+ * Displays a list of squads. FAB to add a new squad
  */
-public class TeamStatsFragment extends Fragment {
+
+public class SquadFixtureFragment extends Fragment {
+
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -29,9 +26,9 @@ public class TeamStatsFragment extends Fragment {
     private String mParam1;
     private String mParam2;
 
-    private OnTeamStatsInteractionListener mListener;
+    private OnSquadFixtureInteractionListener mListener;
 
-    public TeamStatsFragment() {
+    public SquadFixtureFragment() {
         // Required empty public constructor
     }
 
@@ -66,24 +63,24 @@ public class TeamStatsFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_team_stats, container, false);
+        return inflater.inflate(R.layout.fragment_squad_fixture, container, false);
     }
 
     // TODO: Rename method, update argument and hook method into UI event
     public void onButtonPressed(Uri uri) {
         if (mListener != null) {
-            mListener.onTeamStatsInteraction(uri);
+            mListener.onSquadFixtureInteraction(uri);
         }
     }
 
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
-        if (context instanceof OnTeamStatsInteractionListener) {
-            mListener = (OnTeamStatsInteractionListener) context;
+        if (context instanceof OnSquadFixtureInteractionListener) {
+            mListener = (OnSquadFixtureInteractionListener) context;
         } else {
             throw new RuntimeException(context.toString()
-                    + " must implement OnTeamStatsInteractionListener");
+                    + " must implement OnSquadFixtureInteractionListener");
         }
     }
 
@@ -103,8 +100,8 @@ public class TeamStatsFragment extends Fragment {
      * "http://developer.android.com/training/basics/fragments/communicating.html"
      * >Communicating with Other Fragments</a> for more information.
      */
-    public interface OnTeamStatsInteractionListener {
+    public interface OnSquadFixtureInteractionListener {
         // TODO: Update argument type and name
-        void onTeamStatsInteraction(Uri uri);
+        void onSquadFixtureInteraction(Uri uri);
     }
 }

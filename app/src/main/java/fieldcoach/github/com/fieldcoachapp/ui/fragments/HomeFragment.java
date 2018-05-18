@@ -1,4 +1,4 @@
-package fieldcoach.github.com.fieldcoachapp.ui.Fragments;
+package fieldcoach.github.com.fieldcoachapp.ui.fragments;
 
 
 import android.content.Context;
