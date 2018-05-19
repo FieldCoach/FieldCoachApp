@@ -24,11 +24,19 @@ public class TeamsActivity extends AppCompatActivity
                     TeamTablesFragment.OnTeamTableInteractionListener {
 
     BottomNavigationView bottomNavigationView;
+    Fragment fragment = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_teams);
+
+        fragment = HomeFragment.newInstance(null, null);
+        if (fragment != null){
+            FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+            transaction.add(R.id.fragment_container, fragment);
+            transaction.commit();
+        }
 
         bottomNavigationView = findViewById(R.id.navigation_bar);
         bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
@@ -40,26 +48,25 @@ public class TeamsActivity extends AppCompatActivity
     }
 
     private boolean selectFragment(@NonNull MenuItem item) {
-        Fragment fragment = null;
         boolean selected = false;
         switch (item.getItemId()) {
             case R.id.action_home:
-                fragment = new HomeFragment();
+                fragment = HomeFragment.newInstance(null, null);
                 selected = true;
                 break;
             case R.id.action_squad:
-                fragment = new TeamDetailsFragment();
+                fragment = TeamDetailsFragment.newInstance(null, null);
                 selected = true;
                 break;
             case R.id.action_squad_list:
-                fragment = new SquadFixtureFragment();
+                fragment = SquadFixtureFragment.newInstance(null, null);
                 selected = true;
                 break;
         }
 
         if (fragment != null){
             FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
-            transaction.add(R.id.fragment_container, fragment);
+            transaction.replace(R.id.fragment_container, fragment);
             transaction.commit();
         }
         return selected;

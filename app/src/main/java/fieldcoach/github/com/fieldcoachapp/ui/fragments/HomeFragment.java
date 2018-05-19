@@ -6,11 +6,18 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
+import butterknife.Unbinder;
+import fieldcoach.github.com.fieldcoachapp.DummyData;
 import fieldcoach.github.com.fieldcoachapp.R;
+import fieldcoach.github.com.fieldcoachapp.ui.adapters.HomeAdapter;
 
 /**
  * Displays sneak peak info for active squad, upcoming fixtures, table info, fixtures, training schedule.
@@ -18,6 +25,11 @@ import fieldcoach.github.com.fieldcoachapp.R;
  */
 
 public class HomeFragment extends Fragment {
+
+    @BindView(R.id.rv_home)
+    RecyclerView recyclerView;
+
+    private Unbinder unbinder;
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -43,8 +55,8 @@ public class HomeFragment extends Fragment {
      * @return A new instance of fragment TeamStatsFragment.
      */
     // TODO: Rename and change types and number of parameters
-    public static TeamStatsFragment newInstance(String param1, String param2) {
-        TeamStatsFragment fragment = new TeamStatsFragment();
+    public static HomeFragment newInstance(String param1, String param2) {
+        HomeFragment fragment = new HomeFragment();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
         args.putString(ARG_PARAM2, param2);
@@ -65,7 +77,15 @@ public class HomeFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_home, container, false);
+        View view = inflater.inflate(R.layout.fragment_home, container, false);
+        unbinder = ButterKnife.bind(this, view);
+
+        HomeAdapter adapter = new HomeAdapter();
+        adapter.updateList(DummyData.getDummyDataList());
+
+        recyclerView.setAdapter(adapter);
+        recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+        return view;
     }
 
     // TODO: Rename method, update argument and hook method into UI event
