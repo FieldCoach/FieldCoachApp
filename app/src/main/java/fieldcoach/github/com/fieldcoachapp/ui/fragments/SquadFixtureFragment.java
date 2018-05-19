@@ -41,8 +41,8 @@ public class SquadFixtureFragment extends Fragment {
      * @return A new instance of fragment TeamStatsFragment.
      */
     // TODO: Rename and change types and number of parameters
-    public static TeamStatsFragment newInstance(String param1, String param2) {
-        TeamStatsFragment fragment = new TeamStatsFragment();
+    public static SquadFixtureFragment newInstance(String param1, String param2) {
+        SquadFixtureFragment fragment = new SquadFixtureFragment();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
         args.putString(ARG_PARAM2, param2);
