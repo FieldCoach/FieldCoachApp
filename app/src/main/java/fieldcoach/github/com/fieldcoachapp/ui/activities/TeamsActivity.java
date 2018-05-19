@@ -50,25 +50,26 @@ public class TeamsActivity extends AppCompatActivity
     private boolean selectFragment(@NonNull MenuItem item) {
         boolean selected = false;
         switch (item.getItemId()) {
-            case R.id.action_home:
-                fragment = HomeFragment.newInstance(null, null);
+            case R.id.action_teams:
+                // TeamsActivity Intent
                 selected = true;
                 break;
-            case R.id.action_squad:
-                fragment = TeamDetailsFragment.newInstance(null, null);
+            case R.id.action_training:
+                // TrainingActivity Intent
                 selected = true;
                 break;
-            case R.id.action_squad_list:
-                fragment = SquadFixtureFragment.newInstance(null, null);
+            case R.id.action_tactics:
+                // TacticsActivity Intent
+                selected = true;
+                break;
+            case R.id.action_board:
+                // BoardActivity Intent
                 selected = true;
                 break;
         }
 
-        if (fragment != null){
-            FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
-            transaction.replace(R.id.fragment_container, fragment);
-            transaction.commit();
-        }
+        // Launch activity using intent
+
         return selected;
     }
 

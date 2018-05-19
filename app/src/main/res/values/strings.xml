@@ -1,8 +1,9 @@
 <resources>
     <string name="app_name">FieldCoachApp</string>
-    <string name="menu_home">Home</string>
-    <string name="menu_squad">Squad</string>
-    <string name="menu_squad_list">Squad List</string>
+    <string name="menu_teams">Teams</string>
+    <string name="menu_training">Training</string>
+    <string name="menu_tactics">Tactics</string>
+    <string name="menu_board">Board</string>
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
