@@ -11,6 +11,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import fieldcoach.github.com.fieldcoachapp.R;
+import fieldcoach.github.com.fieldcoachapp.model.Player;
 import fieldcoach.github.com.fieldcoachapp.model.Team;
 
 /**
@@ -21,6 +22,10 @@ public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.HomeViewHolder
 
     private List<Team> list = new ArrayList<>();
     private HomeAdapterInteractionListener mListener;
+
+    public HomeAdapter(HomeAdapterInteractionListener mListener) {
+        this.mListener = mListener;
+    }
 
     public interface HomeAdapterInteractionListener {
         void onCardClicked(Team team);
@@ -68,6 +73,21 @@ public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.HomeViewHolder
 
         void onBindCard(Team team) {
             tvTitle.setText(team.getTeamName());
+
+            StringBuilder stringBuilder = new StringBuilder();
+            List<Player> playerList = team.getPlayerList();
+            if (playerList != null) {
+                for (Player player : playerList) {
+                    if (player != null) {
+                        stringBuilder
+                                .append(player.getName())
+                                .append(" - ")
+                                .append(player.getPosition())
+                                .append("\n");
+                    }
+                }
+            }
+            tvContent.setText(stringBuilder.toString());
         }
     }
 }
