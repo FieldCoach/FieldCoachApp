@@ -10,8 +10,8 @@ import android.widget.TextView;
 import java.util.ArrayList;
 import java.util.List;
 
-import fieldcoach.github.com.fieldcoachapp.DummyData;
 import fieldcoach.github.com.fieldcoachapp.R;
+import fieldcoach.github.com.fieldcoachapp.model.Team;
 
 /**
  * Created by Aaron Crutchfield on 5/18/2018.
@@ -19,11 +19,11 @@ import fieldcoach.github.com.fieldcoachapp.R;
 public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.HomeViewHolder>{
 
 
-    private List<DummyData> list = new ArrayList<>();
+    private List<Team> list = new ArrayList<>();
     private HomeAdapterInteractionListener mListener;
 
     public interface HomeAdapterInteractionListener {
-        void onCardClicked(DummyData dummyData);
+        void onCardClicked(Team team);
     }
 
     @NonNull
@@ -44,8 +44,8 @@ public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.HomeViewHolder
         return list.size();
     }
 
-    public void updateList(List<DummyData> dummyDataList) {
-        list = dummyDataList;
+    public void updateList(List<Team> teamList) {
+        list = teamList;
         notifyDataSetChanged();
     }
 
@@ -66,9 +66,8 @@ public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.HomeViewHolder
             tvContent = itemView.findViewById(R.id.tv_card_content);
         }
 
-        void onBindCard(DummyData dummyData) {
-            tvTitle.setText(dummyData.getTitle());
-            tvContent.setText(dummyData.getContent());
+        void onBindCard(Team team) {
+            tvTitle.setText(team.getTeamName());
         }
     }
 }
