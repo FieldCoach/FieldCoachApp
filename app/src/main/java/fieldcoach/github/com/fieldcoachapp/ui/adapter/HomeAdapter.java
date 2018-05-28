@@ -1,4 +1,4 @@
-package fieldcoach.github.com.fieldcoachapp.ui.adapters;
+package fieldcoach.github.com.fieldcoachapp.ui.adapter;
 
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;

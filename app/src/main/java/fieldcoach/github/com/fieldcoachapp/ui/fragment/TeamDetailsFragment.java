@@ -1,4 +1,4 @@
-package fieldcoach.github.com.fieldcoachapp.ui.fragments;
+package fieldcoach.github.com.fieldcoachapp.ui.fragment;
 
 import android.content.Context;
 import android.net.Uri;
@@ -12,10 +12,11 @@ import android.view.ViewGroup;
 import fieldcoach.github.com.fieldcoachapp.R;
 
 /**
- * Displays a list of squads. FAB to add a new squad
+ * Displays active/selected squad.(Pitch/Field View). Team formation, substitutions, tactics etc.
+ * set within this fragment.
  */
 
-public class SquadFixtureFragment extends Fragment {
+public class TeamDetailsFragment extends Fragment {
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -26,9 +27,9 @@ public class SquadFixtureFragment extends Fragment {
     private String mParam1;
     private String mParam2;
 
-    private OnSquadFixtureInteractionListener mListener;
+    private OnTeamDetailsInteractionListener mListener;
 
-    public SquadFixtureFragment() {
+    public TeamDetailsFragment() {
         // Required empty public constructor
     }
 
@@ -41,8 +42,8 @@ public class SquadFixtureFragment extends Fragment {
      * @return A new instance of fragment TeamStatsFragment.
      */
     // TODO: Rename and change types and number of parameters
-    public static SquadFixtureFragment newInstance(String param1, String param2) {
-        SquadFixtureFragment fragment = new SquadFixtureFragment();
+    public static TeamDetailsFragment newInstance(String param1, String param2) {
+        TeamDetailsFragment fragment = new TeamDetailsFragment();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
         args.putString(ARG_PARAM2, param2);
@@ -63,24 +64,24 @@ public class SquadFixtureFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_squad_fixture, container, false);
+        return inflater.inflate(R.layout.fragment_team_details, container, false);
     }
 
     // TODO: Rename method, update argument and hook method into UI event
     public void onButtonPressed(Uri uri) {
         if (mListener != null) {
-            mListener.onSquadFixtureInteraction(uri);
+            mListener.onTeamDetailsInteraction(uri);
         }
     }
 
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
-        if (context instanceof OnSquadFixtureInteractionListener) {
-            mListener = (OnSquadFixtureInteractionListener) context;
+        if (context instanceof OnTeamDetailsInteractionListener) {
+            mListener = (OnTeamDetailsInteractionListener) context;
         } else {
             throw new RuntimeException(context.toString()
-                    + " must implement OnSquadFixtureInteractionListener");
+                    + " must implement OnTeamDetailsInteractionListener");
         }
     }
 
@@ -100,8 +101,8 @@ public class SquadFixtureFragment extends Fragment {
      * "http://developer.android.com/training/basics/fragments/communicating.html"
      * >Communicating with Other Fragments</a> for more information.
      */
-    public interface OnSquadFixtureInteractionListener {
+    public interface OnTeamDetailsInteractionListener {
         // TODO: Update argument type and name
-        void onSquadFixtureInteraction(Uri uri);
+        void onTeamDetailsInteraction(Uri uri);
     }
 }

@@ -1,4 +1,4 @@
-package fieldcoach.github.com.fieldcoachapp.ui.fragments;
+package fieldcoach.github.com.fieldcoachapp.ui.fragment;
 
 
 import android.app.Application;
@@ -31,7 +31,7 @@ import butterknife.Unbinder;
 import fieldcoach.github.com.fieldcoachapp.R;
 import fieldcoach.github.com.fieldcoachapp.model.Player;
 import fieldcoach.github.com.fieldcoachapp.model.Team;
-import fieldcoach.github.com.fieldcoachapp.ui.adapters.HomeAdapter;
+import fieldcoach.github.com.fieldcoachapp.ui.adapter.HomeAdapter;
 import fieldcoach.github.com.fieldcoachapp.viewmodel.TeamViewModel;
 
 /**
