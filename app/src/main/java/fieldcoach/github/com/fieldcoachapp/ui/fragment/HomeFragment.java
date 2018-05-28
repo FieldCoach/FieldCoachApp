@@ -20,6 +20,7 @@ import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
@@ -71,7 +72,7 @@ public class HomeFragment extends Fragment
             @Override
             public void onChanged(@Nullable List<Team> teams) {
                 if(adapter == null) {
-                    adapter = new HomeAdapter(HomeFragment.this);
+                    adapter = new HomeAdapter(HomeFragment.this, teams);
                 } else {
                     adapter.updateList(teams);
                 }
@@ -155,6 +156,7 @@ public class HomeFragment extends Fragment
 
     private void addTeamToDatabase(EditText editText) {
         Team team = new Team();
+        team.setPlayerList(new ArrayList<Player>());
         String teamName = editText.getText().toString();
         if (!teamName.equals("")) {
             team.setTeamName(teamName);

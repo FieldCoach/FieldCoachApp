@@ -7,7 +7,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import fieldcoach.github.com.fieldcoachapp.R;
@@ -18,13 +17,12 @@ import fieldcoach.github.com.fieldcoachapp.model.Team;
  * Created by Aaron Crutchfield on 5/18/2018.
  */
 public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.HomeViewHolder>{
-
-
-    private List<Team> list = new ArrayList<>();
+    private List<Team> teams;
     private HomeAdapterInteractionListener mListener;
 
-    public HomeAdapter(HomeAdapterInteractionListener mListener) {
+    public HomeAdapter(HomeAdapterInteractionListener mListener, List<Team> teams) {
         this.mListener = mListener;
+        this.teams = teams;
     }
 
     public interface HomeAdapterInteractionListener {
@@ -41,16 +39,16 @@ public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.HomeViewHolder
 
     @Override
     public void onBindViewHolder(@NonNull HomeViewHolder holder, int position) {
-        holder.onBindCard(list.get(position));
+        holder.onBindCard(teams.get(position));
     }
 
     @Override
     public int getItemCount() {
-        return list.size();
+        return teams.size();
     }
 
-    public void updateList(List<Team> teamList) {
-        list = teamList;
+    public void updateList(List<Team> teams) {
+        this.teams = teams;
         notifyDataSetChanged();
     }
 
@@ -63,7 +61,7 @@ public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.HomeViewHolder
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    mListener.onCardClicked(list.get(getAdapterPosition()));
+                    mListener.onCardClicked(teams.get(getAdapterPosition()));
                 }
             });
 
