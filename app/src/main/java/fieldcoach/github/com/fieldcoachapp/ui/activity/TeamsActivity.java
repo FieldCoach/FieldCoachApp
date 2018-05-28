@@ -74,11 +74,6 @@ public class TeamsActivity extends AppCompatActivity
     }
 
     @Override
-    public void onHomeInteraction(Uri uri) {
-
-    }
-
-    @Override
     public void onSquadFixtureInteraction(Uri uri) {
 
     }

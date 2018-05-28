@@ -6,7 +6,6 @@ import android.app.Dialog;
 import android.arch.lifecycle.Observer;
 import android.content.Context;
 import android.content.DialogInterface;
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -41,22 +40,10 @@ import fieldcoach.github.com.fieldcoachapp.viewmodel.TeamViewModel;
 
 public class HomeFragment extends Fragment
     implements HomeAdapter.HomeAdapterInteractionListener{
-
     @BindView(R.id.rv_home)
     RecyclerView recyclerView;
-
     private Unbinder unbinder;
     private TeamViewModel teamViewModel;
-
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
-
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
-
     private OnHomeInteractionListener mListener;
 
     public HomeFragment() {
@@ -67,61 +54,35 @@ public class HomeFragment extends Fragment
      * Use this factory method to create a new instance of
      * this fragment using the provided parameters.
      *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
      * @return A new instance of fragment TeamStatsFragment.
      */
-    // TODO: Rename and change types and number of parameters
     public static HomeFragment newInstance(String param1, String param2) {
-        HomeFragment fragment = new HomeFragment();
-        Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
-        fragment.setArguments(args);
-        return fragment;
+        return new HomeFragment();
     }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
-        }
     }
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_home, container, false);
         unbinder = ButterKnife.bind(this, view);
-
-        // https://stackoverflow.com/questions/45632920/why-should-one-use-objects-requirenonnull/45632962?utm_medium=organic&utm_source=google_rich_qa&utm_campaign=google_rich_qa
         Context context = getContext();
         Application application = (Application) Objects.requireNonNull(context).getApplicationContext();
         teamViewModel = new TeamViewModel(application);
-
         final HomeAdapter adapter = new HomeAdapter(this);
-
         recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
-
         teamViewModel.getTeams().observe(this, new Observer<List<Team>>() {
             @Override
             public void onChanged(@Nullable List<Team> teams) {
                 adapter.updateList(teams);
             }
         });
-
         return view;
-    }
-
-    // TODO: Rename method, update argument and hook method into UI event
-    public void onButtonPressed(Uri uri) {
-        if (mListener != null) {
-            mListener.onHomeInteraction(uri);
-        }
     }
 
     @Override
@@ -154,10 +115,8 @@ public class HomeFragment extends Fragment
 
     private void promptForTeamInfo() {
         AlertDialog.Builder builder = new AlertDialog.Builder(Objects.requireNonNull(getContext()));
-
         final EditText editText = new EditText(getContext());
         editText.setSingleLine();
-
         builder.setTitle("Enter a team name")
                 .setView(editText)
                 .setOnKeyListener(new DialogInterface.OnKeyListener() {
@@ -182,9 +141,7 @@ public class HomeFragment extends Fragment
                     public void onClick(DialogInterface dialogInterface, int i) {
 
                     }
-                })
-                .create()
-                .show();
+                }).create().show();
     }
 
     private void addTeamToDatabase(EditText editText) {
@@ -200,7 +157,6 @@ public class HomeFragment extends Fragment
 
     private void promptForTeamPlayers(final Team team) {
         AlertDialog.Builder builder = new AlertDialog.Builder(Objects.requireNonNull(getContext()));
-
         final List<Player> playerList = team.getPlayerList();
         builder.setTitle("Enter player info")
                 .setView(R.layout.dialog_player_info_form)
@@ -224,17 +180,14 @@ public class HomeFragment extends Fragment
 
     private Player getPlayerInfo(DialogInterface dialogInterface) {
         Dialog dialog = (Dialog) dialogInterface;
-
         EditText etFirstName = dialog.findViewById(R.id.et_first_name);
         EditText etLastName = dialog.findViewById(R.id.et_last_name);
         EditText etJerseyNumber = dialog.findViewById(R.id.et_jersey_number);
         EditText etPosition = dialog.findViewById(R.id.et_position);
-
         String firstName = etFirstName.getText().toString();
         String lastName = etLastName.getText().toString();
         String jerseyNumber = etJerseyNumber.getText().toString();
         String position = etPosition.getText().toString();
-
         Player player = new Player();
         if (!(firstName.equals("") || lastName.equals("") ||
                 jerseyNumber.equals("") || position.equals(""))) {
@@ -257,14 +210,7 @@ public class HomeFragment extends Fragment
      * fragment to allow an interaction in this fragment to be communicated
      * to the activity and potentially other fragments contained in that
      * activity.
-     * <p>
-     * See the Android Training lesson <a href=
-     * "http://developer.android.com/training/basics/fragments/communicating.html"
-     * >Communicating with Other Fragments</a> for more information.
      */
     public interface OnHomeInteractionListener {
-        // TODO: Update argument type and name
-        void onHomeInteraction(Uri uri);
     }
-
 }
