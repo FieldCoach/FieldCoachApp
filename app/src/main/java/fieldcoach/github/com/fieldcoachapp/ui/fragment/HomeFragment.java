@@ -42,8 +42,9 @@ public class HomeFragment extends Fragment
     implements HomeAdapter.HomeAdapterInteractionListener{
     @BindView(R.id.rv_home)
     RecyclerView recyclerView;
-    private Unbinder unbinder;
+    private HomeAdapter adapter;
     private TeamViewModel teamViewModel;
+    private Unbinder unbinder;
     private OnHomeInteractionListener mListener;
 
     public HomeFragment() {
@@ -61,6 +62,26 @@ public class HomeFragment extends Fragment
     }
 
     @Override
+    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+        Context context = getContext();
+        Application application = (Application) Objects.requireNonNull(context).getApplicationContext();
+        teamViewModel = new TeamViewModel(application);
+        teamViewModel.getTeams().observe(this, new Observer<List<Team>>() {
+            @Override
+            public void onChanged(@Nullable List<Team> teams) {
+                if(adapter == null) {
+                    adapter = new HomeAdapter(HomeFragment.this);
+                } else {
+                    adapter.updateList(teams);
+                }
+                recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+                recyclerView.setAdapter(adapter);
+            }
+        });
+    }
+
+    @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
     }
@@ -70,18 +91,6 @@ public class HomeFragment extends Fragment
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_home, container, false);
         unbinder = ButterKnife.bind(this, view);
-        Context context = getContext();
-        Application application = (Application) Objects.requireNonNull(context).getApplicationContext();
-        teamViewModel = new TeamViewModel(application);
-        final HomeAdapter adapter = new HomeAdapter(this);
-        recyclerView.setAdapter(adapter);
-        recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
-        teamViewModel.getTeams().observe(this, new Observer<List<Team>>() {
-            @Override
-            public void onChanged(@Nullable List<Team> teams) {
-                adapter.updateList(teams);
-            }
-        });
         return view;
     }
 
