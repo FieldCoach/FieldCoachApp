@@ -17,7 +17,7 @@ import fieldcoach.github.com.fieldcoachapp.ui.fragment.TeamStatsFragment;
 import fieldcoach.github.com.fieldcoachapp.ui.fragment.TeamTablesFragment;
 
 public class TeamsActivity extends AppCompatActivity
-        implements HomeFragment.OnHomeInteractionListener,
+        implements HomeFragment.FragmentInteractionListener,
                     SquadFixtureFragment.OnSquadFixtureInteractionListener,
                     TeamDetailsFragment.OnTeamDetailsInteractionListener,
                     TeamStatsFragment.OnTeamStatsInteractionListener,

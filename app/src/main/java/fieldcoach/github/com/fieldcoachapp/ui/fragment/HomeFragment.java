@@ -46,7 +46,7 @@ public class HomeFragment extends Fragment
     private HomeAdapter adapter;
     private TeamViewModel teamViewModel;
     private Unbinder unbinder;
-    private OnHomeInteractionListener mListener;
+    private FragmentInteractionListener listener;
 
     public HomeFragment() {
         // Required empty public constructor
@@ -98,8 +98,8 @@ public class HomeFragment extends Fragment
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
-        if (context instanceof OnHomeInteractionListener) {
-            mListener = (OnHomeInteractionListener) context;
+        if (context instanceof FragmentInteractionListener) {
+            listener = (FragmentInteractionListener) context;
         } else {
             throw new RuntimeException(context.toString()
                     + " must implement OnHomeInteractionListener");
@@ -109,7 +109,7 @@ public class HomeFragment extends Fragment
     @Override
     public void onDetach() {
         super.onDetach();
-        mListener = null;
+        listener = null;
     }
 
     @Override
@@ -222,6 +222,6 @@ public class HomeFragment extends Fragment
      * to the activity and potentially other fragments contained in that
      * activity.
      */
-    public interface OnHomeInteractionListener {
+    public interface FragmentInteractionListener {
     }
 }
