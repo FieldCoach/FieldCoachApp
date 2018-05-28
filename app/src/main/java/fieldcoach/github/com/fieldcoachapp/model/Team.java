@@ -1,6 +1,7 @@
 package fieldcoach.github.com.fieldcoachapp.model;
 
 import android.arch.persistence.room.Entity;
+import android.arch.persistence.room.Ignore;
 import android.arch.persistence.room.PrimaryKey;
 import android.arch.persistence.room.TypeConverters;
 import android.os.Parcel;
@@ -19,15 +20,18 @@ public class Team implements Parcelable {
     @PrimaryKey (autoGenerate = true)
     private int id;
     private String teamName;
+    private int size;
     @TypeConverters(PlayerListTypeConverters.class)
     private List<Player> playerList;
 
+    @Ignore
     public Team() {
     }
 
-    public Team(int id, String teamName, List<Player> playerList) {
+    public Team(int id, String teamName, int size,  List<Player> playerList) {
         this.id = id;
         this.teamName = teamName;
+        this.size = size;
         this.playerList = playerList;
     }
 
@@ -47,6 +51,14 @@ public class Team implements Parcelable {
         this.teamName = teamName;
     }
 
+    public int getSize() {
+        return size;
+    }
+
+    public void setSize(int size) {
+        this.size = size;
+    }
+
     public List<Player> getPlayerList() {
         return playerList;
     }
@@ -64,12 +76,14 @@ public class Team implements Parcelable {
     public void writeToParcel(Parcel dest, int flags) {
         dest.writeInt(this.id);
         dest.writeString(this.teamName);
+        dest.writeInt(this.size);
         dest.writeList(this.playerList);
     }
 
     protected Team(Parcel in) {
         this.id = in.readInt();
         this.teamName = in.readString();
+        this.size = in.readInt();
         this.playerList = new ArrayList<Player>();
         in.readList(this.playerList, Player.class.getClassLoader());
     }

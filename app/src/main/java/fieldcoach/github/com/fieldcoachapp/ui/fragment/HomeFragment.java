@@ -17,7 +17,10 @@ import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.EditText;
+import android.widget.Spinner;
 import android.widget.Toast;
 
 import java.util.ArrayList;
@@ -45,6 +48,7 @@ public class HomeFragment extends Fragment
     RecyclerView recyclerView;
     private HomeAdapter adapter;
     private TeamViewModel teamViewModel;
+    private int size;
     private Unbinder unbinder;
     private FragmentInteractionListener listener;
 
@@ -125,95 +129,69 @@ public class HomeFragment extends Fragment
 
     private void promptForTeamInfo() {
         AlertDialog.Builder builder = new AlertDialog.Builder(Objects.requireNonNull(getContext()));
-        final EditText editText = new EditText(getContext());
-        editText.setSingleLine();
-        builder.setTitle("Enter a team name")
-                .setView(editText)
-                .setOnKeyListener(new DialogInterface.OnKeyListener() {
-                    @Override
-                    public boolean onKey(DialogInterface dialogInterface, int keyCode, KeyEvent keyEvent) {
-                        if ((keyEvent.getAction() == KeyEvent.ACTION_DOWN) && (keyCode == KeyEvent.KEYCODE_ENTER)) {
-                            addTeamToDatabase(editText);
-                            dialogInterface.dismiss();
-                            return true;
-                        }
-                        return false;
-                    }
-                })
-                .setPositiveButton("OK", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialogInterface, int i) {
-                        addTeamToDatabase(editText);
-                    }
-                })
-                .setNegativeButton("CANCEL", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialogInterface, int i) {
-
-                    }
-                }).create().show();
+        View view = getLayoutInflater().inflate(R.layout.dialog_create_team, null);
+        final EditText teamName = view.findViewById(R.id.et_team_name);
+        final Spinner teamSize = view.findViewById(R.id.sp_team_size);
+        loadSpinner(teamSize);
+        builder.setView(view);
+        builder.setTitle(getString(R.string.td_title))
+                .setPositiveButton(getString(R.string.dialog_positive_button), null)
+                .setNegativeButton(getString(R.string.dialog_negative_button), null);
+        final AlertDialog dialog = builder.create();
+        dialog.show();
+        dialog.getButton(AlertDialog.BUTTON_POSITIVE).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(teamName.getText().toString().isEmpty()) {
+                    Toast.makeText(getActivity(),
+                            getString(R.string.td_empty_name_warning), Toast.LENGTH_SHORT).show();
+                } else {
+                    addTeamToDatabase(teamName.getText().toString(), size);
+                    dialog.dismiss();
+                }
+            }
+        });
     }
 
-    private void addTeamToDatabase(EditText editText) {
+    private void addTeamToDatabase(String teamName, int teamSize) {
         Team team = new Team();
         team.setPlayerList(new ArrayList<Player>());
-        String teamName = editText.getText().toString();
-        if (!teamName.equals("")) {
-            team.setTeamName(teamName);
-            promptForTeamPlayers(team);
-        } else {
-            Toast.makeText(getContext(), "Please enter a valid name", Toast.LENGTH_SHORT).show();
-        }
+        team.setTeamName(teamName);
+        team.setSize(teamSize);
+        teamViewModel.insertTeam(team);
     }
 
-    private void promptForTeamPlayers(final Team team) {
-        AlertDialog.Builder builder = new AlertDialog.Builder(Objects.requireNonNull(getContext()));
-        final List<Player> playerList = team.getPlayerList();
-        builder.setTitle("Enter player info")
-                .setView(R.layout.dialog_player_info_form)
-                .setPositiveButton("OK", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialogInterface, int i) {
-                        playerList.add(getPlayerInfo(dialogInterface));
-                        team.setPlayerList(playerList);
-                        teamViewModel.insertTeam(team);
-                    }
-                })
-                .setNegativeButton("CANCEL", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialogInterface, int i) {
-
-                    }
-                })
-                .create()
-                .show();
-    }
-
-    private Player getPlayerInfo(DialogInterface dialogInterface) {
-        Dialog dialog = (Dialog) dialogInterface;
-        EditText etFirstName = dialog.findViewById(R.id.et_first_name);
-        EditText etLastName = dialog.findViewById(R.id.et_last_name);
-        EditText etJerseyNumber = dialog.findViewById(R.id.et_jersey_number);
-        EditText etPosition = dialog.findViewById(R.id.et_position);
-        String firstName = etFirstName.getText().toString();
-        String lastName = etLastName.getText().toString();
-        String jerseyNumber = etJerseyNumber.getText().toString();
-        String position = etPosition.getText().toString();
-        Player player = new Player();
-        if (!(firstName.equals("") || lastName.equals("") ||
-                jerseyNumber.equals("") || position.equals(""))) {
-            player.setName(firstName);
-            player.setLastName(lastName);
-            player.setJerseyNumber(Integer.valueOf(jerseyNumber));
-            player.setPosition(position);
-            return player;
-        }
-        return null;
+    private void loadSpinner(Spinner spinner) {
+        ArrayAdapter<String> adapter = new ArrayAdapter<>(Objects.requireNonNull(getActivity()),
+                android.R.layout.simple_spinner_item,
+                getResources().getStringArray(R.array.team_sizes_array));
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinner.setAdapter(adapter);
+        spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                switch (position) {
+                    case 0:
+                        size = 11;
+                        break;
+                    case 1:
+                        size = 10;
+                        break;
+                    case 2:
+                        size = 8;
+                        break;
+                }
+            }
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+                    size = 11;
+            }
+        });
     }
 
     @Override
     public void onCardClicked(Team team) {
-        promptForTeamPlayers(team);
+        // promptForTeamPlayers(team);
     }
 
     /**
