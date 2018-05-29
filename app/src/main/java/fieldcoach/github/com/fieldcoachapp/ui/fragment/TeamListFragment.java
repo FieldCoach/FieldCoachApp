@@ -32,24 +32,24 @@ import fieldcoach.github.com.fieldcoachapp.DummyData;
 import fieldcoach.github.com.fieldcoachapp.R;
 import fieldcoach.github.com.fieldcoachapp.model.Player;
 import fieldcoach.github.com.fieldcoachapp.model.Team;
-import fieldcoach.github.com.fieldcoachapp.ui.adapter.HomeAdapter;
+import fieldcoach.github.com.fieldcoachapp.ui.adapter.TeamListAdapter;
 import fieldcoach.github.com.fieldcoachapp.viewmodel.TeamViewModel;
 
 /**
  * Displays sneak peak info for active squad, upcoming fixtures, table info, fixtures, training schedule.
  * Has an App Bar menu for Settings.
  */
-public class HomeFragment extends Fragment
-    implements HomeAdapter.ListItemClickListener {
+public class TeamListFragment extends Fragment
+    implements TeamListAdapter.ListItemClickListener {
     @BindView(R.id.rv_home)
     RecyclerView recyclerView;
-    private HomeAdapter adapter;
+    private TeamListAdapter adapter;
     private TeamViewModel teamViewModel;
     private int size;
     private Unbinder unbinder;
     private FragmentInteractionListener listener;
 
-    public HomeFragment() {
+    public TeamListFragment() {
         // Required empty public constructor
     }
 
@@ -59,8 +59,8 @@ public class HomeFragment extends Fragment
      *
      * @return A new instance of fragment TeamStatsFragment.
      */
-    public static HomeFragment newInstance(String param1, String param2) {
-        return new HomeFragment();
+    public static TeamListFragment newInstance(String param1, String param2) {
+        return new TeamListFragment();
     }
 
     @Override
@@ -75,7 +75,7 @@ public class HomeFragment extends Fragment
             @Override
             public void onChanged(@Nullable List<Team> teams) {
                 if(adapter == null) {
-                    adapter = new HomeAdapter(HomeFragment.this, teams);
+                    adapter = new TeamListAdapter(TeamListFragment.this, teams);
                 } else {
                     adapter.updateList(teams);
                 }

@@ -17,7 +17,7 @@ import fieldcoach.github.com.fieldcoachapp.model.Team;
 /**
  * Created by Aaron Crutchfield on 5/18/2018.
  */
-public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.HomeViewHolder>{
+public class TeamListAdapter extends RecyclerView.Adapter<TeamListAdapter.HomeViewHolder>{
     private List<Team> teams;
     private ListItemClickListener listener;
 
@@ -25,7 +25,7 @@ public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.HomeViewHolder
         void onCardClicked(Team team);
     }
 
-    public HomeAdapter(ListItemClickListener listener, List<Team> teams) {
+    public TeamListAdapter(ListItemClickListener listener, List<Team> teams) {
         this.listener = listener;
         this.teams = teams;
     }

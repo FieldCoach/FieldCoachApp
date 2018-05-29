@@ -10,14 +10,14 @@ import android.os.Bundle;
 import android.view.MenuItem;
 
 import fieldcoach.github.com.fieldcoachapp.R;
-import fieldcoach.github.com.fieldcoachapp.ui.fragment.HomeFragment;
+import fieldcoach.github.com.fieldcoachapp.ui.fragment.TeamListFragment;
 import fieldcoach.github.com.fieldcoachapp.ui.fragment.TeamDetailsFragment;
 import fieldcoach.github.com.fieldcoachapp.ui.fragment.SquadFixtureFragment;
 import fieldcoach.github.com.fieldcoachapp.ui.fragment.TeamStatsFragment;
 import fieldcoach.github.com.fieldcoachapp.ui.fragment.TeamTablesFragment;
 
 public class TeamsActivity extends AppCompatActivity
-        implements HomeFragment.FragmentInteractionListener,
+        implements TeamListFragment.FragmentInteractionListener,
                     SquadFixtureFragment.OnSquadFixtureInteractionListener,
                     TeamDetailsFragment.OnTeamDetailsInteractionListener,
                     TeamStatsFragment.OnTeamStatsInteractionListener,
@@ -31,7 +31,7 @@ public class TeamsActivity extends AppCompatActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_teams);
 
-        fragment = HomeFragment.newInstance(null, null);
+        fragment = TeamListFragment.newInstance(null, null);
         if (fragment != null){
             FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
             transaction.add(R.id.fragment_container, fragment);
