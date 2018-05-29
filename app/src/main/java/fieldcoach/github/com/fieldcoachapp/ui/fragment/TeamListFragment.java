@@ -189,7 +189,7 @@ public class TeamListFragment extends Fragment
     }
 
     @Override
-    public void onCardClicked(Team team) {
+    public void onItemClicked(Team team) {
         // promptForTeamPlayers(team);
     }
 

@@ -22,7 +22,7 @@ public class TeamListAdapter extends RecyclerView.Adapter<TeamListAdapter.HomeVi
     private ListItemClickListener listener;
 
     public interface ListItemClickListener {
-        void onCardClicked(Team team);
+        void onItemClicked(Team team);
     }
 
     public TeamListAdapter(ListItemClickListener listener, List<Team> teams) {
@@ -67,7 +67,7 @@ public class TeamListAdapter extends RecyclerView.Adapter<TeamListAdapter.HomeVi
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    listener.onCardClicked(teams.get(getAdapterPosition()));
+                    listener.onItemClicked(teams.get(getAdapterPosition()));
                 }
             });
         }
