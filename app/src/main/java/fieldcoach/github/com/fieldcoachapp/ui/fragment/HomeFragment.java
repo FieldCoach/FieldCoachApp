@@ -2,10 +2,8 @@ package fieldcoach.github.com.fieldcoachapp.ui.fragment;
 
 
 import android.app.Application;
-import android.app.Dialog;
 import android.arch.lifecycle.Observer;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -13,7 +11,6 @@ import android.support.v4.app.Fragment;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -31,6 +28,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import butterknife.Unbinder;
+import fieldcoach.github.com.fieldcoachapp.DummyData;
 import fieldcoach.github.com.fieldcoachapp.R;
 import fieldcoach.github.com.fieldcoachapp.model.Player;
 import fieldcoach.github.com.fieldcoachapp.model.Team;
@@ -41,9 +39,8 @@ import fieldcoach.github.com.fieldcoachapp.viewmodel.TeamViewModel;
  * Displays sneak peak info for active squad, upcoming fixtures, table info, fixtures, training schedule.
  * Has an App Bar menu for Settings.
  */
-
 public class HomeFragment extends Fragment
-    implements HomeAdapter.HomeAdapterInteractionListener{
+    implements HomeAdapter.ListItemClickListener {
     @BindView(R.id.rv_home)
     RecyclerView recyclerView;
     private HomeAdapter adapter;
@@ -71,7 +68,9 @@ public class HomeFragment extends Fragment
         super.onActivityCreated(savedInstanceState);
         Context context = getContext();
         Application application = (Application) Objects.requireNonNull(context).getApplicationContext();
+        List<Team> staticTeams = DummyData.getTeams();
         teamViewModel = new TeamViewModel(application);
+        teamViewModel.insertAllTeams(staticTeams);
         teamViewModel.getTeams().observe(this, new Observer<List<Team>>() {
             @Override
             public void onChanged(@Nullable List<Team> teams) {
@@ -155,8 +154,8 @@ public class HomeFragment extends Fragment
 
     private void addTeamToDatabase(String teamName, int teamSize) {
         Team team = new Team();
-        team.setPlayerList(new ArrayList<Player>());
-        team.setTeamName(teamName);
+        team.setPlayers(new ArrayList<Player>());
+        team.setName(teamName);
         team.setSize(teamSize);
         teamViewModel.insertTeam(team);
     }

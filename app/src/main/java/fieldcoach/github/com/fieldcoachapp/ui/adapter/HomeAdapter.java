@@ -9,8 +9,9 @@ import android.widget.TextView;
 
 import java.util.List;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
 import fieldcoach.github.com.fieldcoachapp.R;
-import fieldcoach.github.com.fieldcoachapp.model.Player;
 import fieldcoach.github.com.fieldcoachapp.model.Team;
 
 /**
@@ -18,15 +19,15 @@ import fieldcoach.github.com.fieldcoachapp.model.Team;
  */
 public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.HomeViewHolder>{
     private List<Team> teams;
-    private HomeAdapterInteractionListener mListener;
+    private ListItemClickListener listener;
 
-    public HomeAdapter(HomeAdapterInteractionListener mListener, List<Team> teams) {
-        this.mListener = mListener;
-        this.teams = teams;
+    public interface ListItemClickListener {
+        void onCardClicked(Team team);
     }
 
-    public interface HomeAdapterInteractionListener {
-        void onCardClicked(Team team);
+    public HomeAdapter(ListItemClickListener listener, List<Team> teams) {
+        this.listener = listener;
+        this.teams = teams;
     }
 
     @NonNull
@@ -53,39 +54,28 @@ public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.HomeViewHolder
     }
 
     class HomeViewHolder extends RecyclerView.ViewHolder {
-        private TextView tvTitle;
-        private TextView tvContent;
+        @BindView(R.id.tv_team_name)
+        TextView teamName;
+        @BindView(R.id.tv_team_size)
+        TextView teamSize;
+        @BindView(R.id.tv_team_record)
+        TextView teamRecord;
 
         HomeViewHolder(View itemView) {
             super(itemView);
+            ButterKnife.bind(this, itemView);
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    mListener.onCardClicked(teams.get(getAdapterPosition()));
+                    listener.onCardClicked(teams.get(getAdapterPosition()));
                 }
             });
-
-            tvTitle = itemView.findViewById(R.id.tv_card_title);
-            tvContent = itemView.findViewById(R.id.tv_card_content);
         }
 
         void onBindCard(Team team) {
-            tvTitle.setText(team.getTeamName());
-
-            StringBuilder stringBuilder = new StringBuilder();
-            List<Player> playerList = team.getPlayerList();
-            if (playerList != null) {
-                for (Player player : playerList) {
-                    if (player != null) {
-                        stringBuilder
-                                .append(player.getName())
-                                .append(" - ")
-                                .append(player.getPosition())
-                                .append("\n");
-                    }
-                }
-            }
-            tvContent.setText(stringBuilder.toString());
+            teamName.setText(team.getName());
+            teamSize.setText(itemView.getContext().getString(R.string.team_size, team.getSize()));
+            teamRecord.setText(team.getRecord());
         }
     }
 }

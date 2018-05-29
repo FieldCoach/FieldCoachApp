@@ -19,20 +19,29 @@ import fieldcoach.github.com.fieldcoachapp.data.converter.PlayerListTypeConverte
 public class Team implements Parcelable {
     @PrimaryKey (autoGenerate = true)
     private int id;
-    private String teamName;
+    private String name;
     private int size;
+    private String record;
     @TypeConverters(PlayerListTypeConverters.class)
-    private List<Player> playerList;
+    private List<Player> players;
 
     @Ignore
     public Team() {
     }
 
-    public Team(int id, String teamName, int size,  List<Player> playerList) {
-        this.id = id;
-        this.teamName = teamName;
+    @Ignore
+    public Team (String name, int size, List<Player> players, String record) {
+        this.name = name;
         this.size = size;
-        this.playerList = playerList;
+        this.players = players;
+        this.record = record;
+    }
+
+    public Team(int id, String name, int size, List<Player> players) {
+        this.id = id;
+        this.name = name;
+        this.size = size;
+        this.players = players;
     }
 
     public int getId() {
@@ -43,12 +52,12 @@ public class Team implements Parcelable {
         this.id = id;
     }
 
-    public String getTeamName() {
-        return teamName;
+    public String getName() {
+        return name;
     }
 
-    public void setTeamName(String teamName) {
-        this.teamName = teamName;
+    public void setName(String name) {
+        this.name = name;
     }
 
     public int getSize() {
@@ -59,12 +68,20 @@ public class Team implements Parcelable {
         this.size = size;
     }
 
-    public List<Player> getPlayerList() {
-        return playerList;
+    public String getRecord() {
+        return record;
     }
 
-    public void setPlayerList(List<Player> playerList) {
-        this.playerList = playerList;
+    public void setRecord(String record) {
+        this.record = record;
+    }
+
+    public List<Player> getPlayers() {
+        return players;
+    }
+
+    public void setPlayers(List<Player> players) {
+        this.players = players;
     }
 
     @Override
@@ -75,17 +92,19 @@ public class Team implements Parcelable {
     @Override
     public void writeToParcel(Parcel dest, int flags) {
         dest.writeInt(this.id);
-        dest.writeString(this.teamName);
+        dest.writeString(this.name);
         dest.writeInt(this.size);
-        dest.writeList(this.playerList);
+        dest.writeString(this.record);
+        dest.writeList(this.players);
     }
 
     protected Team(Parcel in) {
         this.id = in.readInt();
-        this.teamName = in.readString();
+        this.name = in.readString();
         this.size = in.readInt();
-        this.playerList = new ArrayList<Player>();
-        in.readList(this.playerList, Player.class.getClassLoader());
+        this.record = in.readString();
+        this.players = new ArrayList<Player>();
+        in.readList(this.players, Player.class.getClassLoader());
     }
 
     public static final Parcelable.Creator<Team> CREATOR = new Parcelable.Creator<Team>() {
