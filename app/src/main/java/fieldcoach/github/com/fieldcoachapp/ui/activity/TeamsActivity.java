@@ -11,17 +11,17 @@ import android.view.MenuItem;
 
 import fieldcoach.github.com.fieldcoachapp.R;
 import fieldcoach.github.com.fieldcoachapp.ui.fragment.TeamListFragment;
-import fieldcoach.github.com.fieldcoachapp.ui.fragment.TeamDetailsFragment;
+import fieldcoach.github.com.fieldcoachapp.ui.fragment.TeamDetailFragment;
 import fieldcoach.github.com.fieldcoachapp.ui.fragment.SquadFixtureFragment;
 import fieldcoach.github.com.fieldcoachapp.ui.fragment.TeamStatsFragment;
 import fieldcoach.github.com.fieldcoachapp.ui.fragment.TeamTablesFragment;
 
 public class TeamsActivity extends AppCompatActivity
         implements TeamListFragment.FragmentInteractionListener,
-                    SquadFixtureFragment.OnSquadFixtureInteractionListener,
-                    TeamDetailsFragment.OnTeamDetailsInteractionListener,
-                    TeamStatsFragment.OnTeamStatsInteractionListener,
-                    TeamTablesFragment.OnTeamTableInteractionListener {
+                SquadFixtureFragment.OnSquadFixtureInteractionListener,
+                TeamDetailFragment.FragmentInteractionListener,
+                TeamStatsFragment.OnTeamStatsInteractionListener,
+                TeamTablesFragment.OnTeamTableInteractionListener {
 
     BottomNavigationView bottomNavigationView;
     Fragment fragment = null;
@@ -75,11 +75,6 @@ public class TeamsActivity extends AppCompatActivity
 
     @Override
     public void onSquadFixtureInteraction(Uri uri) {
-
-    }
-
-    @Override
-    public void onTeamDetailsInteraction(Uri uri) {
 
     }
 
