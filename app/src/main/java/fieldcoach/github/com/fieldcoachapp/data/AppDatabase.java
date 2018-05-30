@@ -9,8 +9,10 @@ import android.content.Context;
 import java.util.List;
 
 import fieldcoach.github.com.fieldcoachapp.data.dao.PlayerDao;
+import fieldcoach.github.com.fieldcoachapp.data.dao.PlayerTeamDao;
 import fieldcoach.github.com.fieldcoachapp.data.dao.TeamDao;
 import fieldcoach.github.com.fieldcoachapp.model.Player;
+import fieldcoach.github.com.fieldcoachapp.model.PlayerTeam;
 import fieldcoach.github.com.fieldcoachapp.model.Team;
 
 /**
@@ -21,6 +23,7 @@ public abstract class AppDatabase extends RoomDatabase {
     private static final String DATABASE_NAME = "fieldcoach-db";
     private static AppDatabase sInstance;
     public abstract PlayerDao playerDao();
+    public abstract PlayerTeamDao playerTeamDao();
     public abstract TeamDao teamDao();
 
     public synchronized static AppDatabase getInstance(Context context) {
@@ -49,6 +52,18 @@ public abstract class AppDatabase extends RoomDatabase {
                 database.playerDao().insertAllPlayers(players);
             }
         });
+    }
+
+    public static LiveData<List<PlayerTeam>> getAllPlayerTeams(final  AppDatabase database) {
+        return database.playerTeamDao().getAllPlayerTeams();
+    }
+
+    public static LiveData<PlayerTeam> getPlayerTeam(final  AppDatabase database, int playerTeamId) {
+        return database.playerTeamDao().getPlayerTeam(playerTeamId);
+    }
+
+    public static LiveData<List<PlayerTeam>> getPlayerTeamsByTeam(final AppDatabase database, int teamId) {
+        return database.playerTeamDao().getPlayerTeamsByTeam(teamId);
     }
 
     public static LiveData<List<Team>> getAllTeams(final AppDatabase database) {

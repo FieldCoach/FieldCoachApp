@@ -19,8 +19,6 @@ public class Team implements Parcelable {
     @PrimaryKey (autoGenerate = true)
     private int id;
     private String teamName;
-    @TypeConverters(PlayerListTypeConverters.class)
-    private List<Player> playerList;
 
     public Team() {
     }
@@ -28,7 +26,6 @@ public class Team implements Parcelable {
     public Team(int id, String teamName, List<Player> playerList) {
         this.id = id;
         this.teamName = teamName;
-        this.playerList = playerList;
     }
 
     public int getId() {
@@ -47,14 +44,6 @@ public class Team implements Parcelable {
         this.teamName = teamName;
     }
 
-    public List<Player> getPlayerList() {
-        return playerList;
-    }
-
-    public void setPlayerList(List<Player> playerList) {
-        this.playerList = playerList;
-    }
-
     @Override
     public int describeContents() {
         return 0;
@@ -64,14 +53,11 @@ public class Team implements Parcelable {
     public void writeToParcel(Parcel dest, int flags) {
         dest.writeInt(this.id);
         dest.writeString(this.teamName);
-        dest.writeList(this.playerList);
     }
 
     protected Team(Parcel in) {
         this.id = in.readInt();
         this.teamName = in.readString();
-        this.playerList = new ArrayList<Player>();
-        in.readList(this.playerList, Player.class.getClassLoader());
     }
 
     public static final Parcelable.Creator<Team> CREATOR = new Parcelable.Creator<Team>() {

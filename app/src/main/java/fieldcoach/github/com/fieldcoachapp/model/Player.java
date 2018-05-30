@@ -18,12 +18,6 @@ public class Player implements Parcelable {
     private int id;
     private String name;
     private String lastName;
-    private int jerseyNumber;
-    private String position;
-    @TypeConverters(TeamIdsTypeConverters.class)
-    private int[] teamIds;
-    @TypeConverters(TeamNamesTypeConverters.class)
-    private String[] teamNames;
 
     public Player() {
     }
@@ -58,38 +52,6 @@ public class Player implements Parcelable {
         this.lastName = lastName;
     }
 
-    public int getJerseyNumber() {
-        return jerseyNumber;
-    }
-
-    public void setJerseyNumber(int jerseyNumber) {
-        this.jerseyNumber = jerseyNumber;
-    }
-
-    public String getPosition() {
-        return position;
-    }
-
-    public void setPosition(String position) {
-        this.position = position;
-    }
-
-    public int[] getTeamIds() {
-        return teamIds;
-    }
-
-    public void setTeamIds(int[] teamIds) {
-        this.teamIds = teamIds;
-    }
-
-    public String[] getTeamNames() {
-        return teamNames;
-    }
-
-    public void setTeamNames(String[] teamNames) {
-        this.teamNames = teamNames;
-    }
-
     @Override
     public int describeContents() {
         return 0;
@@ -100,20 +62,12 @@ public class Player implements Parcelable {
         dest.writeInt(this.id);
         dest.writeString(this.name);
         dest.writeString(this.lastName);
-        dest.writeInt(this.jerseyNumber);
-        dest.writeString(this.position);
-        dest.writeIntArray(this.teamIds);
-        dest.writeStringArray(this.teamNames);
     }
 
     protected Player(Parcel in) {
         this.id = in.readInt();
         this.name = in.readString();
         this.lastName = in.readString();
-        this.jerseyNumber = in.readInt();
-        this.position = in.readString();
-        this.teamIds = in.createIntArray();
-        this.teamNames = in.createStringArray();
     }
 
     public static final Parcelable.Creator<Player> CREATOR = new Parcelable.Creator<Player>() {
