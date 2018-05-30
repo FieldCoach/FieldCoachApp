@@ -1,6 +1,7 @@
 package fieldcoach.github.com.fieldcoachapp.model;
 
 import android.arch.persistence.room.Entity;
+import android.arch.persistence.room.Ignore;
 import android.arch.persistence.room.PrimaryKey;
 import android.arch.persistence.room.TypeConverters;
 import android.os.Parcel;
@@ -19,7 +20,14 @@ public class Player implements Parcelable {
     private String name;
     private String lastName;
 
+    @Ignore
     public Player() {
+    }
+
+    @Ignore
+    public Player(String name, String lastName) {
+        this.name = name;
+        this.lastName = lastName;
     }
 
     public Player(int id, String name, String lastName) {

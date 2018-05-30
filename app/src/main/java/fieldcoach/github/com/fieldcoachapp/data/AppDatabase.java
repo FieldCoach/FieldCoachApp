@@ -18,7 +18,7 @@ import fieldcoach.github.com.fieldcoachapp.model.Team;
 /**
  * App database class.
  */
-@Database(entities = {Player.class, Team.class}, version = 1)
+@Database(entities = {Player.class, Team.class}, version = 3)
 public abstract class AppDatabase extends RoomDatabase {
     private static final String DATABASE_NAME = "fieldcoach-db";
     private static AppDatabase sInstance;

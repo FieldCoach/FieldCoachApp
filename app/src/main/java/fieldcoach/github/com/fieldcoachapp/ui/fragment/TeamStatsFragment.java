@@ -1,4 +1,4 @@
-package fieldcoach.github.com.fieldcoachapp.ui.fragments;
+package fieldcoach.github.com.fieldcoachapp.ui.fragment;
 
 import android.content.Context;
 import android.net.Uri;

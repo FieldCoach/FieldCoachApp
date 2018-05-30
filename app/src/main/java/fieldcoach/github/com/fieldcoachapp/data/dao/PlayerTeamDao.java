@@ -10,6 +10,7 @@ import android.arch.persistence.room.Query;
 import java.util.List;
 
 import fieldcoach.github.com.fieldcoachapp.model.Player;
+import fieldcoach.github.com.fieldcoachapp.model.PlayerAndPlayerTeam;
 import fieldcoach.github.com.fieldcoachapp.model.PlayerTeam;
 
 /**
@@ -34,6 +35,13 @@ public interface PlayerTeamDao {
     @Query("SELECT * FROM playerteams WHERE "
             + "playerteams.playerId LIKE :playerId")
     LiveData<List<PlayerTeam>> getPlayerTeamsByPlayer(int playerId);
+
+    // These method names end up getting ridiculous because of the table name, but you can see that
+    // this is the join method that we talked about that pulls players and playerteams as a single
+    // object when bringing in what we want for a team. This keeps the correct players with their
+    // corresponding playerteams at all times so we don't have to do a search to keep them together.
+    @Query("SELECT players.*, playerteams.* FROM players INNER JOIN playerteams ON players.id = playerteams.playerId WHERE playerteams.teamId LIKE :teamId")
+    List<PlayerAndPlayerTeam> getPlayersAndPlayerTeamsByTeam(int teamId);
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     void insertPlayerTeam(PlayerTeam playerTeam);

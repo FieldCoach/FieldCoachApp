@@ -1,15 +1,13 @@
 package fieldcoach.github.com.fieldcoachapp.model;
 
 import android.arch.persistence.room.Entity;
+import android.arch.persistence.room.Ignore;
 import android.arch.persistence.room.PrimaryKey;
-import android.arch.persistence.room.TypeConverters;
 import android.os.Parcel;
 import android.os.Parcelable;
 
 import java.util.ArrayList;
 import java.util.List;
-
-import fieldcoach.github.com.fieldcoachapp.data.converter.PlayerListTypeConverters;
 
 /**
  * Team entity class.
@@ -18,14 +16,25 @@ import fieldcoach.github.com.fieldcoachapp.data.converter.PlayerListTypeConverte
 public class Team implements Parcelable {
     @PrimaryKey (autoGenerate = true)
     private int id;
-    private String teamName;
+    private String name;
+    private int size;
+    private String record;
 
+    @Ignore
     public Team() {
     }
 
-    public Team(int id, String teamName, List<Player> playerList) {
+    @Ignore
+    public Team (String name, int size, String record) {
+        this.name = name;
+        this.size = size;
+        this.record = record;
+    }
+
+    public Team(int id, String name, int size) {
         this.id = id;
-        this.teamName = teamName;
+        this.name = name;
+        this.size = size;
     }
 
     public int getId() {
@@ -36,12 +45,28 @@ public class Team implements Parcelable {
         this.id = id;
     }
 
-    public String getTeamName() {
-        return teamName;
+    public String getName() {
+        return name;
     }
 
-    public void setTeamName(String teamName) {
-        this.teamName = teamName;
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public int getSize() {
+        return size;
+    }
+
+    public void setSize(int size) {
+        this.size = size;
+    }
+
+    public String getRecord() {
+        return record;
+    }
+
+    public void setRecord(String record) {
+        this.record = record;
     }
 
     @Override
@@ -52,12 +77,16 @@ public class Team implements Parcelable {
     @Override
     public void writeToParcel(Parcel dest, int flags) {
         dest.writeInt(this.id);
-        dest.writeString(this.teamName);
+        dest.writeString(this.name);
+        dest.writeInt(this.size);
+        dest.writeString(this.record);
     }
 
     protected Team(Parcel in) {
         this.id = in.readInt();
-        this.teamName = in.readString();
+        this.name = in.readString();
+        this.size = in.readInt();
+        this.record = in.readString();
     }
 
     public static final Parcelable.Creator<Team> CREATOR = new Parcelable.Creator<Team>() {

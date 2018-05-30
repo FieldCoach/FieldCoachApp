@@ -1,4 +1,4 @@
-package fieldcoach.github.com.fieldcoachapp.ui.activities;
+package fieldcoach.github.com.fieldcoachapp.ui.activity;
 
 import android.net.Uri;
 import android.support.annotation.NonNull;
@@ -10,18 +10,18 @@ import android.os.Bundle;
 import android.view.MenuItem;
 
 import fieldcoach.github.com.fieldcoachapp.R;
-import fieldcoach.github.com.fieldcoachapp.ui.fragments.HomeFragment;
-import fieldcoach.github.com.fieldcoachapp.ui.fragments.TeamDetailsFragment;
-import fieldcoach.github.com.fieldcoachapp.ui.fragments.SquadFixtureFragment;
-import fieldcoach.github.com.fieldcoachapp.ui.fragments.TeamStatsFragment;
-import fieldcoach.github.com.fieldcoachapp.ui.fragments.TeamTablesFragment;
+import fieldcoach.github.com.fieldcoachapp.ui.fragment.TeamListFragment;
+import fieldcoach.github.com.fieldcoachapp.ui.fragment.TeamDetailFragment;
+import fieldcoach.github.com.fieldcoachapp.ui.fragment.SquadFixtureFragment;
+import fieldcoach.github.com.fieldcoachapp.ui.fragment.TeamStatsFragment;
+import fieldcoach.github.com.fieldcoachapp.ui.fragment.TeamTablesFragment;
 
 public class TeamsActivity extends AppCompatActivity
-        implements HomeFragment.OnHomeInteractionListener,
-                    SquadFixtureFragment.OnSquadFixtureInteractionListener,
-                    TeamDetailsFragment.OnTeamDetailsInteractionListener,
-                    TeamStatsFragment.OnTeamStatsInteractionListener,
-                    TeamTablesFragment.OnTeamTableInteractionListener {
+        implements TeamListFragment.FragmentInteractionListener,
+                SquadFixtureFragment.OnSquadFixtureInteractionListener,
+                TeamDetailFragment.FragmentInteractionListener,
+                TeamStatsFragment.OnTeamStatsInteractionListener,
+                TeamTablesFragment.OnTeamTableInteractionListener {
 
     BottomNavigationView bottomNavigationView;
     Fragment fragment = null;
@@ -31,7 +31,7 @@ public class TeamsActivity extends AppCompatActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_teams);
 
-        fragment = HomeFragment.newInstance(null, null);
+        fragment = TeamListFragment.newInstance(null, null);
         if (fragment != null){
             FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
             transaction.add(R.id.fragment_container, fragment);
@@ -74,17 +74,7 @@ public class TeamsActivity extends AppCompatActivity
     }
 
     @Override
-    public void onHomeInteraction(Uri uri) {
-
-    }
-
-    @Override
     public void onSquadFixtureInteraction(Uri uri) {
-
-    }
-
-    @Override
-    public void onTeamDetailsInteraction(Uri uri) {
 
     }
 

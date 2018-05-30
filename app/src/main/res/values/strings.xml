@@ -11,4 +11,23 @@
     <string name="last_name">Last Name</string>
     <string name="jersey_number">Jersey Number</string>
     <string name="position">Position</string>
+
+    <!-- Dialog Resources -->
+    <string name="dialog_positive_button">OK</string>
+    <string name="dialog_negative_button">CANCEL</string>
+
+    <!-- Create Team Dialog Resources -->
+    <string name="td_title">Create Team</string>
+    <string name="td_team_name">Enter team name</string>
+    <string name="td_team_size">Select team size</string>
+    <string name="td_empty_name_warning">Please enter a valid name</string>
+    <string name="team_size">%d Players</string>
+
+    <!-- Create Team Dialog Spinner Array -->
+    <string-array name="team_sizes_array">
+        <item>11 vs 11</item>
+        <item>10 vs 10</item>
+        <item>8 vs 8</item>
+    </string-array>
+
 </resources>
