@@ -11,10 +11,10 @@ import java.util.List;
 // similar to what this is - an embed and a relation
 public class PlayerAndPlayerTeam {
     @Embedded
-    Player player;
+    public Player player;
 
     @Embedded
-    PlayerTeam playerTeam;
+    public PlayerTeam playerTeam;
 
     public Player getPlayer() {
         return player;

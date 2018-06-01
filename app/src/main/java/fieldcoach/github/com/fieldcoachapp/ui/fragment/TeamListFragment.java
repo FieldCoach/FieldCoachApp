@@ -154,7 +154,7 @@ public class TeamListFragment extends Fragment
 
     private void addTeamToDatabase(String teamName, int teamSize) {
         Team team = new Team();
-        team.setPlayers(new ArrayList<Player>());
+        team.setPlayerList(new ArrayList<Player>());
         team.setName(teamName);
         team.setSize(teamSize);
         teamViewModel.insertTeam(team);

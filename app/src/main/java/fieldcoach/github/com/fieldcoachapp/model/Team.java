@@ -3,11 +3,13 @@ package fieldcoach.github.com.fieldcoachapp.model;
 import android.arch.persistence.room.Entity;
 import android.arch.persistence.room.Ignore;
 import android.arch.persistence.room.PrimaryKey;
+import android.arch.persistence.room.TypeConverters;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-import java.util.ArrayList;
 import java.util.List;
+
+import fieldcoach.github.com.fieldcoachapp.data.converter.PlayerListTypeConverters;
 
 /**
  * Team entity class.
@@ -19,16 +21,19 @@ public class Team implements Parcelable {
     private String name;
     private int size;
     private String record;
+    @TypeConverters(PlayerListTypeConverters.class)
+    private List<Player> playerList;
 
     @Ignore
     public Team() {
     }
 
     @Ignore
-    public Team (String name, int size, String record) {
+    public Team(String name, int size, List<Player> playerList, String record) {
         this.name = name;
         this.size = size;
         this.record = record;
+        this.playerList = playerList;
     }
 
     public Team(int id, String name, int size) {
@@ -69,6 +74,14 @@ public class Team implements Parcelable {
         this.record = record;
     }
 
+    public List<Player> getPlayerList() {
+        return playerList;
+    }
+
+    public void setPlayerList(List<Player> playerList) {
+        this.playerList = playerList;
+    }
+
     @Override
     public int describeContents() {
         return 0;
@@ -80,6 +93,7 @@ public class Team implements Parcelable {
         dest.writeString(this.name);
         dest.writeInt(this.size);
         dest.writeString(this.record);
+        dest.writeTypedList(this.playerList);
     }
 
     protected Team(Parcel in) {
@@ -87,9 +101,10 @@ public class Team implements Parcelable {
         this.name = in.readString();
         this.size = in.readInt();
         this.record = in.readString();
+        this.playerList = in.createTypedArrayList(Player.CREATOR);
     }
 
-    public static final Parcelable.Creator<Team> CREATOR = new Parcelable.Creator<Team>() {
+    public static final Creator<Team> CREATOR = new Creator<Team>() {
         @Override
         public Team createFromParcel(Parcel source) {
             return new Team(source);

@@ -2,12 +2,8 @@ package fieldcoach.github.com.fieldcoachapp.model;
 
 import android.arch.persistence.room.Entity;
 import android.arch.persistence.room.PrimaryKey;
-import android.arch.persistence.room.TypeConverters;
 import android.os.Parcel;
 import android.os.Parcelable;
-
-import fieldcoach.github.com.fieldcoachapp.data.converter.TeamIdsTypeConverters;
-import fieldcoach.github.com.fieldcoachapp.data.converter.TeamNamesTypeConverters;
 
 /**
  * PlayerTeam entity class.
@@ -15,45 +11,45 @@ import fieldcoach.github.com.fieldcoachapp.data.converter.TeamNamesTypeConverter
 @Entity(tableName="playerteams")
 public class PlayerTeam implements Parcelable {
     @PrimaryKey (autoGenerate = true)
-    private int id;
-    private String name;
-    private String lastName;
+    private int playerTeamId;
+    private String firstName;
+    private String playerTeam_lastName;
     private int jerseyNumber;
     private String position;
     private int teamId;
-    private int playerId;
+    private int playerTeam_playerId;
 
     public PlayerTeam() {
     }
 
-    public PlayerTeam(int id, String name, String lastName) {
-        this.id = id;
-        this.name = name;
-        this.lastName = lastName;
+    public PlayerTeam(int playerTeamId, String firstName, String lastName) {
+        this.playerTeamId = playerTeamId;
+        this.firstName = firstName;
+        this.playerTeam_lastName = lastName;
     }
 
-    public int getId() {
-        return id;
+    public int getPlayerTeamId() {
+        return playerTeamId;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public void setPlayerTeamId(int playerTeamId) {
+        this.playerTeamId = playerTeamId;
     }
 
-    public String getName() {
-        return name;
+    public String getFirstName() {
+        return firstName;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
     }
 
-    public String getLastName() {
-        return lastName;
+    public String getPlayerTeam_lastName() {
+        return playerTeam_lastName;
     }
 
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
+    public void setPlayerTeam_lastName(String playerTeam_lastName) {
+        this.playerTeam_lastName = playerTeam_lastName;
     }
 
     public int getJerseyNumber() {
@@ -76,16 +72,16 @@ public class PlayerTeam implements Parcelable {
         return teamId;
     }
 
-    public void setTeamIds(int teamId) {
+    public void setTeamId(int teamId) {
         this.teamId = teamId;
     }
 
-    public int getPlayerId() {
-        return playerId;
+    public int getPlayerTeam_playerId() {
+        return playerTeam_playerId;
     }
 
-    public void setPlayerId(int playerId) {
-        this.playerId = playerId;
+    public void setPlayerTeam_playerId(int playerTeam_playerId) {
+        this.playerTeam_playerId = playerTeam_playerId;
     }
 
     @Override
@@ -95,23 +91,23 @@ public class PlayerTeam implements Parcelable {
 
     @Override
     public void writeToParcel(Parcel dest, int flags) {
-        dest.writeInt(this.id);
-        dest.writeString(this.name);
-        dest.writeString(this.lastName);
+        dest.writeInt(this.playerTeamId);
+        dest.writeString(this.firstName);
+        dest.writeString(this.playerTeam_lastName);
         dest.writeInt(this.jerseyNumber);
         dest.writeString(this.position);
         dest.writeInt(this.teamId);
-        dest.writeInt(this.playerId);
+        dest.writeInt(this.playerTeam_playerId);
     }
 
     protected PlayerTeam(Parcel in) {
-        this.id = in.readInt();
-        this.name = in.readString();
-        this.lastName = in.readString();
+        this.playerTeamId = in.readInt();
+        this.firstName = in.readString();
+        this.playerTeam_lastName = in.readString();
         this.jerseyNumber = in.readInt();
         this.position = in.readString();
         this.teamId = in.readInt();
-        this.playerId = in.readInt();
+        this.playerTeam_playerId = in.readInt();
     }
 
     public static final Creator<PlayerTeam> CREATOR = new Creator<PlayerTeam>() {

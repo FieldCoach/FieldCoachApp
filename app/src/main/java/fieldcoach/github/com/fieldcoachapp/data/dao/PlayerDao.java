@@ -19,7 +19,7 @@ public interface PlayerDao {
     @Query("SELECT * FROM players")
     LiveData<List<Player>> getAllPlayers();
 
-    @Query("SELECT * FROM players WHERE ID = :playerId")
+    @Query("SELECT * FROM players WHERE playerId = :playerId")
     LiveData<Player> getPlayer(int playerId);
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
