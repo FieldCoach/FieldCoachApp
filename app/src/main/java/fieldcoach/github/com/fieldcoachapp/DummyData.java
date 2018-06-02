@@ -44,6 +44,24 @@ public class DummyData {
         List<Team> teams = new ArrayList<>();
         teams.add(new Team("FC Real Madrid", 11, playerSet1, "10W 3D 1L"));
         teams.add(new Team("FC Barcelona", 11, playerSet2, "12W 1D 2L"));
+        //Added numbers for uniqueness to check scrolling RecyclerView
+        teams.add(new Team("1FC Real Madrid", 11, playerSet1, "10W 3D 1L"));
+        teams.add(new Team("2FC Real Madrid", 11, playerSet1, "10W 3D 1L"));
+        teams.add(new Team("3FC Real Madrid", 11, playerSet1, "10W 3D 1L"));
+        teams.add(new Team("4FC Real Madrid", 11, playerSet1, "10W 3D 1L"));
+        teams.add(new Team("5FC Real Madrid", 11, playerSet1, "10W 3D 1L"));
+        teams.add(new Team("6FC Real Madrid", 11, playerSet1, "10W 3D 1L"));
+        teams.add(new Team("7FC Real Madrid", 11, playerSet1, "10W 3D 1L"));
+        teams.add(new Team("8FC Real Madrid", 11, playerSet1, "10W 3D 1L"));
+        teams.add(new Team("9FC Real Madrid", 11, playerSet1, "10W 3D 1L"));
+        teams.add(new Team("10FC Real Madrid", 11, playerSet1, "10W 3D 1L"));
+        teams.add(new Team("11FC Real Madrid", 11, playerSet1, "10W 3D 1L"));
+        teams.add(new Team("12FC Real Madrid", 11, playerSet1, "10W 3D 1L"));
+        teams.add(new Team("13FC Real Madrid", 11, playerSet1, "10W 3D 1L"));
+        //Test for duplicates
+        teams.add(new Team("13FC Real Madrid", 11, playerSet1, "10W 3D 1L"));
+        teams.add(new Team("13FC Real Madrid", 11, playerSet1, "10W 3D 1L"));
+
         return teams;
     }
 }

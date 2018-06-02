@@ -2,6 +2,7 @@ package fieldcoach.github.com.fieldcoachapp.model;
 
 import android.arch.persistence.room.Entity;
 import android.arch.persistence.room.Ignore;
+import android.arch.persistence.room.Index;
 import android.arch.persistence.room.PrimaryKey;
 import android.arch.persistence.room.TypeConverters;
 import android.os.Parcel;
@@ -14,7 +15,7 @@ import fieldcoach.github.com.fieldcoachapp.data.converter.PlayerListTypeConverte
 /**
  * Team entity class.
  */
-@Entity(tableName = "teams")
+@Entity(tableName = "teams", indices = {@Index(value = "name", unique = true)})
 public class Team implements Parcelable {
     @PrimaryKey (autoGenerate = true)
     private int id;
