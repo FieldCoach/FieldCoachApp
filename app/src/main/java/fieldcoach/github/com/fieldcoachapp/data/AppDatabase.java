@@ -18,7 +18,7 @@ import fieldcoach.github.com.fieldcoachapp.model.Team;
 /**
  * App database class.
  */
-@Database(entities = {Player.class, Team.class, PlayerTeam.class}, version = 7)
+@Database(entities = {Player.class, Team.class, PlayerTeam.class}, version = 6)
 public abstract class AppDatabase extends RoomDatabase {
     private static final String DATABASE_NAME = "fieldcoach-db";
     private static AppDatabase sInstance;
@@ -28,13 +28,7 @@ public abstract class AppDatabase extends RoomDatabase {
 
     public synchronized static AppDatabase getInstance(Context context) {
         if(sInstance == null) {
-            sInstance = Room
-                    .databaseBuilder(
-                            context.getApplicationContext(),
-                            AppDatabase.class,
-                            DATABASE_NAME)
-                    .fallbackToDestructiveMigration()
-                    .build();
+            sInstance = buildDatabase(context.getApplicationContext());
         }
         return sInstance;
     }
